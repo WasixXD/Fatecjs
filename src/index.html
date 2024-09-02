@@ -28,30 +28,57 @@
     <body>
         <div class="main dots is-flex is-justify-content-center is-align-items-center" style="height: 100vh;">
             <div class="container has-text-black has-background-white has-text-centered is-family-monospace p-4">
-                <div class="autor">
-                    <h1 class="is-size-1 has-text-weight-bold m-4">Lucas</h1>
+                <div class="autor-div">
+                    <h1 class="is-size-1 has-text-weight-bold m-4 autor">Autor</h1>
                 </div>
-                <div class="piada is-size-4 has-text-weight-normal p-4">
-                    Por que o computador foi preso? porque ele executou um comando
+                <div class="piada-div is-size-4 has-text-weight-normal p-4 piada">
+                   Piada 
                 </div>
                 <div class="buttons is-flex-direction-row is-flex-wrap-wrap is-justify-content-center is-align-items-center p-4">
-                    <button class="button is-link is-rounded"><i class="fa-solid fa-thumbs-up"></i></button>
-                    <button class="button is-danger is-rounded"><i class="fa-solid fa-thumbs-down"></i></button>
+                    <button class="button is-link is-rounded is-large" onclick="like()"><i class="fa-solid fa-thumbs-up"></i></button>
+                    <button class="button is-danger is-rounded is-large" onclick="dislike()"><i class="fa-solid fa-thumbs-down"></i></button>
                 </div>
             </div>
         </div>
         <script>
-            window.addEventListener('load', (async () => {
-                const url = "https://fatecjs.onrender.com/piada/random"
+            const autor = document.querySelector(".autor")
+            const piada = document.querySelector(".piada")
 
+            let id = ""
+            async function getPiada() {
+                const url = "https://fatecjs.onrender.com/piada/random"
+    
                 const response = await fetch(url, {
                     method: "GET",
                 })
                 const result = await response.json() 
+    
+                id = result.id
+                autor.textContent = result.autor
+                piada.textContent = result.piada
 
-                console.log(result)
-            }))
+            }
+
+            window.addEventListener('load', getPiada)
+
+            async function like() {
+                const url = `https://fatecjs.onrender.com/piada/${id}/like`
+                const response = await fetch(url, {
+                    method: "PUT"
+                })
+                if(response.status === 200) {
+                    getPiada()
+                }
+            }
+            async function dislike() {
+                const url = `https://fatecjs.onrender.com/piada/${id}/dislike`
+                const response = await fetch(url, {
+                    method: "PUT"
+                })
+                if(response.status === 200) {
+                    getPiada()
+                }
+            }
         </script>
     </body>
-
 </html>
