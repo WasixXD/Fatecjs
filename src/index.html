@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Oficina de NodeJS</title>
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css"
+        > 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <style>
+            body {
+                background-color: #FFF;
+            }
+            .dots {
+                margin: 0;
+                padding: 0;
+                background: radial-gradient(circle, #2e2e2e 1px, transparent 1px);
+                background-size: 20px 20px;
+                height: 100vh;
+                width: 100vw;
+                position: relative;
+                overflow-x: hidden;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="main dots is-flex is-justify-content-center is-align-items-center" style="height: 100vh;">
+            <div class="container has-text-black has-background-white has-text-centered is-family-monospace p-4">
+                <div class="autor">
+                    <h1 class="is-size-1 has-text-weight-bold m-4">Lucas</h1>
+                </div>
+                <div class="piada is-size-4 has-text-weight-normal p-4">
+                    Por que o computador foi preso? porque ele executou um comando
+                </div>
+                <div class="buttons is-flex-direction-row is-flex-wrap-wrap is-justify-content-center is-align-items-center p-4">
+                    <button class="button is-link is-rounded"><i class="fa-solid fa-thumbs-up"></i></button>
+                    <button class="button is-danger is-rounded"><i class="fa-solid fa-thumbs-down"></i></button>
+                </div>
+            </div>
+        </div>
+        <script>
+            window.addEventListener('load', (async () => {
+                const url = "https://fatecjs.onrender.com/piada/random"
+
+                const response = await fetch(url, {
+                    method: "GET",
+                })
+                const result = await response.json() 
+
+                console.log(result)
+            }))
+        </script>
+    </body>
+
+</html>
